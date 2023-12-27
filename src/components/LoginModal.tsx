@@ -18,7 +18,7 @@ export const LoginModal = () => {
 
   useEffect(() => {
     onClose();
-  }, [pathname]);
+  }, [pathname, onClose]);
 
   if (user) {
     return (
@@ -51,7 +51,7 @@ export const LoginModal = () => {
           <LinkIcon className="h-10 w-10 text-purple-600" />
           <div className="font-bold text-2xl">Sign in to your account</div>
           <div className="opacity-60">
-            Login to LinkTab - we're happy to see you!
+            Login to LinkTab - we are happy to see you!
           </div>
           <SignInButton afterSignInUrl="/">
             <Button className="w-full mt-2">Continue to Login</Button>
