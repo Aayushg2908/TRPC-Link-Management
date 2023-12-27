@@ -53,7 +53,7 @@ export const LoginModal = () => {
           <div className="opacity-60">
             Login to LinkTab - we are happy to see you!
           </div>
-          <SignInButton afterSignInUrl="/">
+          <SignInButton afterSignInUrl="/links">
             <Button className="w-full mt-2">Continue to Login</Button>
           </SignInButton>
         </div>

@@ -4,19 +4,21 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { SignOutButton, useUser } from "@clerk/nextjs";
+import { SignOutButton } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { LinkIcon, LayoutDashboard, Group } from "lucide-react";
+import { trpc } from "@/app/_trpc/client";
 
 const Avatars = () => {
   const router = useRouter();
-  const { user } = useUser();
+  const { data: user } = trpc.user.currentUser.useQuery();
+  if (!user) return null;
 
   return (
     <Popover>
       <PopoverTrigger>
         <Avatar>
-          <AvatarImage src={user?.imageUrl} alt="ProfileLogo" />
+          <AvatarImage src={user.photo} alt="ProfileLogo" />
         </Avatar>
       </PopoverTrigger>
       <PopoverContent className="w-fit">
@@ -27,7 +29,7 @@ const Avatars = () => {
                 {user?.username}
               </span>
               <span className="font-sm opacity-50 tracking-tight">
-                {user?.emailAddresses[0].emailAddress}
+                {user.email}
               </span>
             </div>
             <SignOutButton signOutCallback={() => router.push("/")}>

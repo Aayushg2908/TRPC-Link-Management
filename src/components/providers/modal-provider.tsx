@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { LoginModal } from "../LoginModal";
+import CreateLinkModal from "../CreateLinkModal";
+import UploadImageModal from "../UploadImageModal";
 
 const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -11,10 +13,12 @@ const ModalProvider = () => {
   }, []);
 
   if (!isMounted) return null;
-  
+
   return (
     <>
       <LoginModal />
+      <CreateLinkModal />
+      <UploadImageModal />
     </>
   );
 };
