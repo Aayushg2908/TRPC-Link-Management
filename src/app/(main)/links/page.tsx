@@ -1,9 +1,28 @@
 import { db } from "@/lib/db";
 import CreateLinkButton from "./_components/CreateLinkButton";
 import LinkCard from "@/components/LinkCard";
+import { auth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
 const LinksPage = async () => {
+  const { userId } = await auth();
+  if (!userId) {
+    redirect("/");
+  }
+
+  const user = await db.user.findUnique({
+    where: {
+      clerkId: userId,
+    },
+  });
+  if (!user) {
+    redirect("/");
+  }
+
   const links = await db.links.findMany({
+    where: {
+      userId: user.id,
+    },
     orderBy: {
       createdAt: "desc",
     },
