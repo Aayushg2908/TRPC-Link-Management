@@ -8,10 +8,18 @@ import { trpc } from "@/app/_trpc/client";
 import { useRouter } from "next/navigation";
 
 const UploadImageModal = () => {
-  const { id, isOpen, close } = useImageModal();
+  const { id, type, isOpen, close } = useImageModal();
   const router = useRouter();
 
-  const { mutateAsync: uploadImage } = trpc.link.uploadImage.useMutation({
+  const { mutateAsync: uploadLinkImage } = trpc.link.uploadImage.useMutation({
+    onSuccess: (data) => {
+      if (data.code === 200) {
+        router.refresh();
+      }
+    },
+  });
+
+  const { mutateAsync: uploadGroupImage } = trpc.group.uploadImage.useMutation({
     onSuccess: (data) => {
       if (data.code === 200) {
         router.refresh();
@@ -25,8 +33,13 @@ const UploadImageModal = () => {
         <UploadDropzone
           endpoint="imageUploader"
           onClientUploadComplete={(res) => {
-            uploadImage({ id, imageUrl: res[0].url });
-            toast.success("Upload Completed");
+            if (type === "link") {
+              uploadLinkImage({ id, imageUrl: res[0].url });
+              toast.success("Upload Completed");
+            } else {
+              uploadGroupImage({ id, imageUrl: res[0].url });
+              toast.success("Upload Completed");
+            }
             close();
             router.refresh();
           }}

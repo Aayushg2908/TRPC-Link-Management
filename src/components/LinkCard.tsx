@@ -2,7 +2,6 @@ import { Links } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import LinkAction from "./LinkAction";
-import { ImagePlus } from "lucide-react";
 import { Button } from "./ui/button";
 import LinkImageButton from "./LinkImageButton";
 

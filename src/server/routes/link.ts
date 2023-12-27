@@ -8,10 +8,11 @@ export const linkRouter = router({
     .input(
       z.object({
         url: z.string().min(8),
+        groupId: z.string().min(1).optional(),
       })
     )
     .mutation(async (opts) => {
-      const { url } = opts.input;
+      const { ...values } = opts.input;
       const { userId } = opts.ctx;
 
       const user = await db.user.findUnique({
@@ -28,8 +29,8 @@ export const linkRouter = router({
 
       const link = await db.links.create({
         data: {
-          url,
           userId: user.id,
+          ...values,
         },
       });
 

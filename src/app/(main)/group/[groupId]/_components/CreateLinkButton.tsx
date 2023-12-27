@@ -3,12 +3,11 @@
 import { Button } from "@/components/ui/button";
 import { useCreateLinkModal } from "@/hooks/use-createlink-modal";
 
-const CreateLinkButton = () => {
+const CreateLinkButton = ({ groupId }: { groupId: string }) => {
   const { onOpen } = useCreateLinkModal();
-  const id = "";
 
   const handleClick = () => {
-    onOpen(id);
+    onOpen(groupId);
   };
 
   return (

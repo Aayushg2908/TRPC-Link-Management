@@ -3,7 +3,7 @@
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useCreateLinkModal } from "@/hooks/use-createlink-modal";
+import { useCreateGroupModal } from "@/hooks/use-creategroup-modal";
 import { Dialog, DialogContent } from "./ui/dialog";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,21 +19,19 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
-  url: z.string().min(8, {
-    message: "URL must start with https://",
-  }),
+  name: z.string().min(1),
 });
 
-const CreateLinkModal = () => {
-  const { id, isOpen, onClose } = useCreateLinkModal();
+const CreateGroupModal = () => {
+  const { isOpen, close } = useCreateGroupModal();
   const router = useRouter();
 
   const { mutateAsync: createLink, isLoading } =
-    trpc.link.createLink.useMutation({
+    trpc.group.createGroup.useMutation({
       onSuccess: (data) => {
         if (data.code === 200) {
-          toast.success("Link created successfully");
-          onClose();
+          toast.success("Group created successfully");
+          close();
           form.reset();
           router.refresh();
         }
@@ -48,25 +46,21 @@ const CreateLinkModal = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      url: "",
+      name: "",
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (id === "") {
-      await createLink(values);
-    } else {
-      await createLink({ ...values, groupId: id });
-    }
+    await createLink(values);
   }
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={close}>
       <DialogContent>
         <div className="flex flex-col gap-y-2">
-          <div className="text-xl font-semibold">Add New Link</div>
+          <div className="text-xl font-semibold">Create New Group</div>
           <div className="text-sm opacity-70">
-            A new Link will be added to your collection. Click confirm when you
+            A new Group will be added to your account. Click confirm when you
             are done.
           </div>
           <Form {...form}>
@@ -76,11 +70,11 @@ const CreateLinkModal = () => {
             >
               <FormField
                 control={form.control}
-                name="url"
+                name="name"
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder="https://ui.shadcn.com" {...field} />
+                      <Input placeholder="Name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -101,4 +95,4 @@ const CreateLinkModal = () => {
   );
 };
 
-export default CreateLinkModal;
+export default CreateGroupModal;

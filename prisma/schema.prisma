@@ -16,6 +16,7 @@ model User {
   photo     String
 
   links     Links[]
+  groups    Groups[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -23,11 +24,31 @@ model User {
 
 model Links {
   id        String   @id @default(uuid())
-  url       String   @unique
+  url       String
   image     String?
 
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  groupId   String?
+  group     Groups?  @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([groupId])
+}
+
+model Groups {
+  id        String   @id @default(uuid())
+  name      String
+  image     String?
+
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  links     Links[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

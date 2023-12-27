@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { LoginModal } from "../LoginModal";
 import CreateLinkModal from "../CreateLinkModal";
 import UploadImageModal from "../UploadImageModal";
+import CreateGroupModal from "../CreateGroupModal";
 
 const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -19,6 +20,7 @@ const ModalProvider = () => {
       <LoginModal />
       <CreateLinkModal />
       <UploadImageModal />
+      <CreateGroupModal />
     </>
   );
 };

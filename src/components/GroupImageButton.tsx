@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
 import { ImagePlus } from "lucide-react";
 import { Button } from "./ui/button";
 import { useImageModal } from "@/hooks/use-image-modal";
 
-const LinkImageButton = ({ id }: { id: string }) => {
+const GroupImageButton = ({ id }: { id: string }) => {
   const { open } = useImageModal();
-  const type = "link";
+  const type = "group";
 
   return (
     <Button
@@ -19,4 +19,4 @@ const LinkImageButton = ({ id }: { id: string }) => {
   );
 };
 
-export default LinkImageButton;
+export default GroupImageButton;
