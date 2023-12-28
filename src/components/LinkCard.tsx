@@ -9,6 +9,13 @@ interface LinkCardProps {
   link: Links;
 }
 
+function truncate(str: string, num: number) {
+  if (str.length <= num) {
+    return str;
+  }
+  return str.slice(0, num) + "...";
+}
+
 const LinkCard = ({ link }: LinkCardProps) => {
   return (
     <div className="my-2 w-full border border-1 h-[350px]">
@@ -27,8 +34,11 @@ const LinkCard = ({ link }: LinkCardProps) => {
           )}
         </Link>
         <div className="mt-2 grid grid-cols-6 rounded-lg">
-          <div className="col-span-4 flex-1 p-2 opacity-70 bg-gray-300 dark:bg-gray-700 rounded-lg">
+          <div className="hidden col-span-4 p-2 sm:flex items-center text-sm text-muted-foreground bg-gray-300 dark:bg-gray-700 rounded-lg">
             {link.url}
+          </div>
+          <div className="sm:hidden col-span-4 p-2 flex items-center text-sm text-muted-foreground bg-gray-300 dark:bg-gray-700 rounded-lg">
+            {truncate(link.url, 25)}
           </div>
           <LinkImageButton id={link.id} />
           <LinkAction link={link} />
