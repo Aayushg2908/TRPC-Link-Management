@@ -23,7 +23,7 @@ const LinkToGroupModal = () => {
           <div className="text-muted-foreground">
             Select which Group you want your links to be added to.
           </div>
-          {isLoading && <Loader2 />}
+          {isLoading && <Loader2 className="w-full mx-auto" />}
           {groups && (
             <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
               {groups.map((group, index) => (
