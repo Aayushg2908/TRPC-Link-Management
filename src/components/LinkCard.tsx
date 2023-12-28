@@ -2,8 +2,8 @@ import { Links } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import LinkAction from "./LinkAction";
-import { Button } from "./ui/button";
 import LinkImageButton from "./LinkImageButton";
+import LinkToGroupButton from "./LinkToGroupButton";
 
 interface LinkCardProps {
   link: Links;
@@ -33,9 +33,7 @@ const LinkCard = ({ link }: LinkCardProps) => {
           <LinkImageButton id={link.id} />
           <LinkAction link={link} />
         </div>
-        <Button className="mt-2 w-full" variant="secondary">
-          Move to Group
-        </Button>
+        <LinkToGroupButton id={link.id} />
       </div>
     </div>
   );

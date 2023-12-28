@@ -11,5 +11,5 @@ export const useCreateLinkModal = create<CreateLinkModalState>((set) => ({
   id: "",
   isOpen: false,
   onOpen: (id) => set({ isOpen: true, id }),
-  onClose: () => set({ isOpen: false }),
+  onClose: () => set({ isOpen: false, id: "" }),
 }));

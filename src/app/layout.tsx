@@ -32,7 +32,7 @@ export default function RootLayout({
           <TRPCProvider>
             <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
               <ModalProvider />
-              <Toaster />
+              <Toaster richColors />
               <Navbar />
               {children}
             </ThemeProvider>

@@ -1,24 +1,18 @@
-"use client";
-
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import Link from "next/link";
-import { Button } from "./ui/button";
-import { SignOutButton } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
-import { LinkIcon, LayoutDashboard, Group } from "lucide-react";
-import { trpc } from "@/app/_trpc/client";
+import { LinkIcon, LayoutDashboard, Group, Loader2 } from "lucide-react";
+import LogoutButton from "./LogoutButton";
+import { currentUser } from "@clerk/nextjs";
 
-const Avatars = () => {
-  const router = useRouter();
-  const { data: user } = trpc.user.currentUser.useQuery();
-  if (!user) return null;
+const Avatars = async () => {
+  const user = await currentUser();
 
   return (
     <Popover>
       <PopoverTrigger>
         <Avatar>
-          <AvatarImage src={user.photo} alt="ProfileLogo" />
+          <AvatarImage src={user?.imageUrl} alt="ProfileLogo" />
         </Avatar>
       </PopoverTrigger>
       <PopoverContent className="w-fit">
@@ -29,12 +23,10 @@ const Avatars = () => {
                 {user?.username}
               </span>
               <span className="font-sm opacity-50 tracking-tight">
-                {user.email}
+                {user?.emailAddresses[0].emailAddress}
               </span>
             </div>
-            <SignOutButton signOutCallback={() => router.push("/")}>
-              <Button>Sign Out</Button>
-            </SignOutButton>
+            <LogoutButton />
           </div>
           <Link href="/links" className="flex gap-x-2">
             <LinkIcon className="text-purple-600" />

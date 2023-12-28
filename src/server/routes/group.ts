@@ -181,6 +181,121 @@ export const groupRouter = router({
         code: 200,
       };
     }),
+  allGroups: privateProcedure.query(async (opts) => {
+    const { userId } = opts.ctx;
+
+    const user = await db.user.findUnique({
+      where: {
+        clerkId: userId,
+      },
+    });
+    if (!user) {
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to get groups",
+      });
+    }
+
+    const groups = await db.groups.findMany({
+      where: {
+        userId: user.id,
+      },
+      select: {
+        id: true,
+        name: true,
+        _count: {
+          select: {
+            links: true,
+          },
+        },
+      },
+    });
+
+    return groups;
+  }),
+  addLinkToGroup: privateProcedure
+    .input(
+      z.object({
+        linkId: z.string().min(1),
+        groupId: z.string().min(1),
+      })
+    )
+    .mutation(async (opts) => {
+      const { linkId, groupId } = opts.input;
+      const { userId } = opts.ctx;
+
+      const user = await db.user.findUnique({
+        where: {
+          clerkId: userId,
+        },
+      });
+      if (!user) {
+        throw new TRPCError({
+          code: "UNAUTHORIZED",
+          message: "You must be logged in to add a link to a group",
+        });
+      }
+
+      const group = await db.groups.findUnique({
+        where: {
+          id: groupId,
+          userId: user.id,
+        },
+      });
+      if (!group) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Group not found",
+        });
+      }
+
+      const link = await db.links.findUnique({
+        where: {
+          id: linkId,
+          userId: user.id,
+        },
+      });
+      if (!link) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Link not found",
+        });
+      }
+
+      const alreadyInGroup = await db.groups.findFirst({
+        where: {
+          id: groupId,
+          links: {
+            some: {
+              id: linkId,
+            },
+          },
+        },
+      });
+      if (alreadyInGroup) {
+        return {
+          code: 400,
+        };
+      }
+
+      await db.groups.update({
+        where: {
+          id: groupId,
+          userId: user.id,
+        },
+        data: {
+          links: {
+            connect: {
+              id: linkId,
+            },
+          },
+        },
+      });
+
+      return {
+        code: 200,
+      };
+    }),
 });
 
 export type GroupRouter = typeof groupRouter;
