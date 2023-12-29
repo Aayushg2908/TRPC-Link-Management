@@ -4,6 +4,9 @@ import Link from "next/link";
 import LinkAction from "./LinkAction";
 import LinkImageButton from "./LinkImageButton";
 import LinkToGroupButton from "./LinkToGroupButton";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "./ui/button";
+import { Group } from "lucide-react";
 
 interface LinkCardProps {
   link: Links;
@@ -43,7 +46,17 @@ const LinkCard = ({ link }: LinkCardProps) => {
           <LinkImageButton id={link.id} />
           <LinkAction link={link} />
         </div>
-        <LinkToGroupButton id={link.id} />
+        <div className="flex items-center gap-x-2">
+          <LinkToGroupButton id={link.id} />
+          {link.groupId && (
+            <Link
+              className={cn("mt-2", buttonVariants())}
+              href={`/group/${link.groupId}`}
+            >
+              View Group <Group className=" ml-1 w-4 h-4" />
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );
