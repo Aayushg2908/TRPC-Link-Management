@@ -21,11 +21,11 @@ const GroupsPage = async () => {
       userId: user.id,
     },
     include: {
-      links: true
+      links: true,
     },
     orderBy: {
       createdAt: "desc",
-    }
+    },
   });
 
   return (
@@ -39,11 +39,21 @@ const GroupsPage = async () => {
         </div>
         <CreateGroupButton />
       </div>
-      <div className="mt-10 mb-10 ml-2 grid grid-cols-1 md:grid-cols-2 gap-4">
-        {groups.map((group) => (
-          <GroupCard key={group.id} group={group} />
-        ))}
-      </div>
+      {groups.length > 0 ? (
+        <div className="mt-10 mb-10 ml-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+          {groups.map((group) => (
+            <GroupCard key={group.id} group={group} />
+          ))}
+        </div>
+      ) : (
+        <div className="mt-10 flex flex-col items-center text-muted-foreground">
+          <div>No Groups!!</div>
+          <div>
+            Oops! Looks like you don't have any groups created. You should
+            create some.
+          </div>
+        </div>
+      )}
     </div>
   );
 };

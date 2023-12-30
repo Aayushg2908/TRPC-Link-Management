@@ -37,11 +37,21 @@ const LinksPage = async () => {
         </div>
         <CreateLinkButton />
       </div>
-      <div className="mt-10 mb-10 ml-2 grid grid-cols-1 md:grid-cols-2 gap-4">
-        {links.map((link) => (
-          <LinkCard key={link.id} link={link} />
-        ))}
-      </div>
+      {links.length > 0 ? (
+        <div className="mt-10 mb-10 ml-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+          {links.map((link) => (
+            <LinkCard key={link.id} link={link} />
+          ))}
+        </div>
+      ) : (
+        <div className="mt-10 flex flex-col items-center text-muted-foreground">
+          <div>No Links!!</div>
+          <div>
+            Oops! Looks like you don't have any links created. You should
+            create some.
+          </div>
+        </div>
+      )}
     </div>
   );
 };

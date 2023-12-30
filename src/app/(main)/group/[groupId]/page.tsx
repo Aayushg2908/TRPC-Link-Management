@@ -37,11 +37,21 @@ const GroupIdPage = async ({ params }: { params: { groupId: string } }) => {
         </div>
         <CreateLinkButton groupId={group.id} />
       </div>
-      <div className="mt-10 mb-10 ml-2 grid grid-cols-1 md:grid-cols-2 gap-4">
-        {group.links.map((link) => (
-          <LinkCard key={link.id} link={link} />
-        ))}
-      </div>
+      {group.links.length > 0 ? (
+        <div className="mt-10 mb-10 ml-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+          {group.links.map((link) => (
+            <LinkCard key={link.id} link={link} />
+          ))}
+        </div>
+      ) : (
+        <div className="mt-10 flex flex-col items-center text-muted-foreground">
+          <div>No Links!!</div>
+          <div>
+            Oops! Looks like you don't have any links in this group. You should
+            create some.
+          </div>
+        </div>
+      )}
     </div>
   );
 };
