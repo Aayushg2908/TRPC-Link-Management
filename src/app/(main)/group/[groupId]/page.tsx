@@ -47,8 +47,8 @@ const GroupIdPage = async ({ params }: { params: { groupId: string } }) => {
         <div className="mt-10 flex flex-col items-center text-muted-foreground">
           <div>No Links!!</div>
           <div>
-            Oops! Looks like you don't have any links in this group. You should
-            create some.
+            Oops! Looks like you don&apos;t have any links in this group. You
+            should create some.
           </div>
         </div>
       )}

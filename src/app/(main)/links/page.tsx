@@ -47,7 +47,7 @@ const LinksPage = async () => {
         <div className="mt-10 flex flex-col items-center text-muted-foreground">
           <div>No Links!!</div>
           <div>
-            Oops! Looks like you don't have any links created. You should
+            Oops! Looks like you don&apos;t have any links created. You should
             create some.
           </div>
         </div>

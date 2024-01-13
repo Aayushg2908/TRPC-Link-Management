@@ -49,7 +49,7 @@ const GroupsPage = async () => {
         <div className="mt-10 flex flex-col items-center text-muted-foreground">
           <div>No Groups!!</div>
           <div>
-            Oops! Looks like you don't have any groups created. You should
+            Oops! Looks like you don&apos;t have any groups created. You should
             create some.
           </div>
         </div>
