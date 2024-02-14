@@ -37,7 +37,7 @@ const LinkCard = ({ link }: LinkCardProps) => {
           )}
         </Link>
         <div className="mt-2 grid grid-cols-6 rounded-lg">
-          <div className="hidden col-span-4 p-2 sm:flex items-center text-sm text-muted-foreground bg-gray-300 dark:bg-gray-700 rounded-lg">
+          <div className="hidden col-span-4 p-2 sm:flex items-center text-sm text-muted-foreground bg-gray-300 dark:bg-gray-700 rounded-lg line-clamp-1">
             {link.url}
           </div>
           <div className="sm:hidden col-span-4 p-2 flex items-center text-sm text-muted-foreground bg-gray-300 dark:bg-gray-700 rounded-lg">
