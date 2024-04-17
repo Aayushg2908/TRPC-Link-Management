@@ -67,9 +67,9 @@ const ShortenerPage = async ({
                   </Link>
                   <Link
                     target="_blank"
-                    href={`http://localhost:3000/${shortenLink.slug}`}
+                    href={`http://trpc-link-management.vercel.app/${shortenLink.slug}`}
                   >
-                    localhost:3000/{shortenLink.slug}
+                    trpc-link-management.vercel.app/{shortenLink.slug}
                   </Link>
                 </div>
               </div>

@@ -63,7 +63,9 @@ const Actions = ({
       <DropdownMenuContent>
         <DropdownMenuItem
           onSelect={() => {
-            window.navigator.clipboard.writeText(`localhost:3000/${slug}`);
+            window.navigator.clipboard.writeText(
+              `trpc-link-management.vercel.app/${slug}`
+            );
             toast.success("Copied to clipboard");
           }}
           className="cursor-pointer"
