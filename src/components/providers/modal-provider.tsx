@@ -6,6 +6,8 @@ import CreateLinkModal from "../CreateLinkModal";
 import UploadImageModal from "../UploadImageModal";
 import CreateGroupModal from "../CreateGroupModal";
 import LinkToGroupModal from "../LinkToGroupModal";
+import CreateProjectModal from "../CreateProjectModal";
+import ShortenLinkModal from "../ShortenLinkModal";
 
 const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -23,6 +25,8 @@ const ModalProvider = () => {
       <UploadImageModal />
       <CreateGroupModal />
       <LinkToGroupModal />
+      <CreateProjectModal />
+      <ShortenLinkModal />
     </>
   );
 };

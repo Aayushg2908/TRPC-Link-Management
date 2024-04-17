@@ -40,6 +40,10 @@ const Avatars = async () => {
             <LayoutDashboard className="text-purple-600" />
             Dashboard
           </Link>
+          <Link href="/shortener" className="flex gap-x-2">
+            <LinkIcon className="text-purple-600" />
+            URL Shortener
+          </Link>
         </div>
       </PopoverContent>
     </Popover>

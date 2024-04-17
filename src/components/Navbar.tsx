@@ -16,6 +16,7 @@ const Navbar = async () => {
             <Link href="/links">Links</Link>
             <Link href="/groups">Groups</Link>
             <Link href="/dashboard">Dashboard</Link>
+            <Link href="/shortener">URL Shortener</Link>
           </div>
           <Avatars />
         </SignedIn>
