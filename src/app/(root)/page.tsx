@@ -17,9 +17,9 @@ const features = [
   },
   {
     icon: Globe,
-    title: "Share with the World",
+    title: "URL Shortener",
     description:
-      "Make your groups public. Turn your curated collections into valuable resources for others. Share your expertise and interests with the world.",
+      "Struggling to manage very large URLs? Our URL shortener allows you to shorten long URLs into short, easy-to-remember links.",
   },
   {
     icon: Link,
