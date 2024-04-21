@@ -1,9 +1,9 @@
-import React from "react";
 import CreateGroupButton from "./_components/CreateGroupButton";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import GroupCard from "@/components/GroupCard";
+import Wrapper from "@/components/Wrapper";
 
 const GroupsPage = async () => {
   const { userId } = await auth();
@@ -29,16 +29,8 @@ const GroupsPage = async () => {
   });
 
   return (
-    <div className="max-w-5xl mx-auto mt-6">
-      <div className="flex flex-col justify-between sm:flex-row">
-        <div className="flex flex-col gap-y-1 ml-2">
-          <div className="text-3xl font-bold">Groups</div>
-          <div className="opacity-60">
-            List of all your Groups in one place.
-          </div>
-        </div>
-        <CreateGroupButton />
-      </div>
+
+    <Wrapper Heading="Groups" subHeading="List of all your Groups in one place." createButton={<CreateGroupButton />} >
       {groups.length > 0 ? (
         <div className="mt-10 mb-10 ml-2 grid grid-cols-1 md:grid-cols-2 gap-4">
           {groups.map((group) => (
@@ -54,7 +46,7 @@ const GroupsPage = async () => {
           </div>
         </div>
       )}
-    </div>
+    </Wrapper>
   );
 };
 

@@ -6,6 +6,7 @@ import { DataTable } from "@/components/ui/data-table";
 import { LinksColumn, columns } from "./_components/link-columns";
 import { format } from "date-fns";
 import { GroupsColumn, groupColumns } from "./_components/group-columns";
+import Wrapper from "@/components/Wrapper";
 
 const DashboardPage = async () => {
   const { userId } = await auth();
@@ -71,13 +72,7 @@ const DashboardPage = async () => {
   }));
 
   return (
-    <div className="max-w-5xl mx-auto mt-6">
-      <div className="flex flex-col justify-between sm:flex-row">
-        <div className="flex flex-col gap-y-1 ml-2">
-          <div className="text-3xl font-bold">Dashboard</div>
-          <div className="opacity-60">Elevate your web links management</div>
-        </div>
-      </div>
+    <Wrapper Heading="Dashboard" subHeading="Elevate your web links management" >
       <div className="mt-10 mb-10 ml-2 grid grid-cols-1 md:grid-cols-3 gap-4">
         {constant.map((item, index) => (
           <InfoCard
@@ -101,7 +96,7 @@ const DashboardPage = async () => {
           data={formattedGroups}
         />
       </div>
-    </div>
+    </Wrapper>
   );
 };
 

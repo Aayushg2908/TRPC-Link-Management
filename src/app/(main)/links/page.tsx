@@ -3,6 +3,7 @@ import CreateLinkButton from "./_components/CreateLinkButton";
 import LinkCard from "@/components/LinkCard";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+import Wrapper from "@/components/Wrapper";
 
 const LinksPage = async () => {
   const { userId } = await auth();
@@ -29,14 +30,8 @@ const LinksPage = async () => {
   });
 
   return (
-    <div className="max-w-5xl mx-auto mt-6">
-      <div className="flex flex-col justify-between sm:flex-row">
-        <div className="flex flex-col gap-y-1 ml-2">
-          <div className="text-3xl font-bold">Links</div>
-          <div className="opacity-60">All your links at one place.</div>
-        </div>
-        <CreateLinkButton />
-      </div>
+
+    <Wrapper Heading="Links" subHeading="All your links at one place." createButton={<CreateLinkButton />} >
       {links.length > 0 ? (
         <div className="mt-10 mb-10 ml-2 grid grid-cols-1 md:grid-cols-2 gap-4">
           {links.map((link) => (
@@ -52,7 +47,7 @@ const LinksPage = async () => {
           </div>
         </div>
       )}
-    </div>
+    </Wrapper>
   );
 };
 

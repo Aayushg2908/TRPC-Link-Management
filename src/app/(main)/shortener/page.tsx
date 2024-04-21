@@ -5,6 +5,7 @@ import CreateProjectButton from "./_components/CreateProjectButton";
 import Link from "next/link";
 import { LinkIcon } from "lucide-react";
 import Actions from "./_components/Actions";
+import Wrapper from "@/components/Wrapper";
 
 const UrlShortenerPage = async () => {
   const { userId } = await auth();
@@ -32,14 +33,7 @@ const UrlShortenerPage = async () => {
   });
 
   return (
-    <div className="max-w-5xl mx-auto mt-6">
-      <div className="flex flex-col justify-between sm:flex-row">
-        <div className="flex flex-col gap-y-1 ml-2">
-          <div className="text-3xl font-bold">Projects</div>
-          <div className="opacity-60">All your projects at one place.</div>
-        </div>
-        <CreateProjectButton />
-      </div>
+    <Wrapper Heading="Projects" subHeading="All your projects at one place." createButton={<CreateProjectButton />} >
       {projects.length > 0 ? (
         <div className="mt-10 mb-10 ml-2 flex flex-wrap justify-center gap-4">
           {projects.map((project) => (
@@ -75,7 +69,7 @@ const UrlShortenerPage = async () => {
           </div>
         </div>
       )}
-    </div>
+    </Wrapper>
   );
 };
 

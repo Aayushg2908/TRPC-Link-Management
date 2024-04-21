@@ -5,6 +5,7 @@ import { notFound, redirect } from "next/navigation";
 import { LinkIcon } from "lucide-react";
 import Link from "next/link";
 import Actions from "./_components/Actions";
+import Wrapper from "@/components/Wrapper";
 
 const ShortenerPage = async ({
   params,
@@ -38,16 +39,7 @@ const ShortenerPage = async ({
   }
 
   return (
-    <div className="max-w-5xl mx-auto mt-6">
-      <div className="flex flex-col justify-between sm:flex-row">
-        <div className="flex flex-col gap-y-1 ml-2">
-          <div className="text-3xl font-bold">{project.name}</div>
-          <div className="opacity-60">
-            All your shortened links at one place.
-          </div>
-        </div>
-        <CreateShortenedLink />
-      </div>
+    <Wrapper Heading={project.name} subHeading="All your shortened links at one place." createButton={<CreateShortenedLink />} >
       {project.shortenLinks.length > 0 ? (
         <div className="mt-10 mb-10 mx-auto flex flex-col gap-y-2 items-center max-w-3xl px-2">
           {project.shortenLinks.map((shortenLink) => (
@@ -90,7 +82,7 @@ const ShortenerPage = async ({
           </div>
         </div>
       )}
-    </div>
+    </Wrapper>
   );
 };
 
